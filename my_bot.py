@@ -2,10 +2,11 @@ import discord
 from discord.ext import commands
 import random
 
-TOKEN = 'NTA3MDU1Njg3OTI3NDYzOTQ1.XUJGsA.Z8qeFNniLfbYVVUpEs7HSnr5nN4'
+TOKEN = 'NTA3MDU1Njg3OTI3NDYzOTQ1.XUJSuA.JVkkV3FYdj5jan-dSVt7m_4trTU'
 
 description = ''
 client = commands.Bot(command_prefix='.', description=description)
+client.remove_command('help')
 
 @client.event
 async def on_ready():
@@ -89,6 +90,24 @@ async def clear(ctx, amount=5):
         return
     await ctx.channel.purge(limit=amount)
 
+
+@client.command(pass_context=True)
+async def help(ctx):
+    author = ctx.message.author
+
+    embed = discord.Embed(
+        colour = discord.Colour.orange()
+    )
+
+    embed.set_author(name='Help')
+    embed.add_field(name='.ping', value='Returns Pong! along with bot latency', inline=False)
+    embed.add_field(name='.8ball (question)', value='Magic 8ball! Answers your question with precise accuracy!', inline=False)
+    embed.add_field(name='.clear (num)', value='Admin command. Clears amount of messages specified. Default amount is 5.', inline=False)
+    embed.add_field(name='.kick (@member) (reason)', value='Admin command. Kicks specified user.', inline=False)
+    embed.add_field(name='.ban (@member) (reason)', value='Admin command. Bans specified user.', inline=False)
+    embed.add_field(name='.unban (member name & ID)', value='Admin command. Unbans specified user.', inline=False)
+
+    await author.send(embed=embed)
 
 
 client.run(TOKEN)
