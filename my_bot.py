@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import random
 
-TOKEN = 'NTA3MDU1Njg3OTI3NDYzOTQ1.XUJSuA.JVkkV3FYdj5jan-dSVt7m_4trTU'
+TOKEN = 'NTA3MDU1Njg3OTI3NDYzOTQ1.XUJVag.90Ja8NZiV_oI5n4twdceM02m6lI'
 
 description = ''
 client = commands.Bot(command_prefix='.', description=description)
@@ -26,6 +26,19 @@ async def on_member_join(member):
 
 
 #async def set_default_role():
+
+
+@client.command(pass_context=True)
+async def join(ctx):
+    channel = ctx.message.author.voice.channel
+    await discord.VoiceChannel.connect(channel)
+    
+    
+    
+
+@client.command(pass_context=True)
+async def leave(ctx):
+    await ctx.voice_client.disconnect()
 
 
 @client.command()
